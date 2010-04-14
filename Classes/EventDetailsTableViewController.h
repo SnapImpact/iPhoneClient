@@ -24,6 +24,7 @@ enum Actions {
    Event* event;
    EventDetailsHeaderCell* headerCell;
    ActionsView* headerActions;
+   UIFont* reallySmallFont;
    UIFont* smallFont;
    UIFont* mediumFont;
    UIFont* largeFont;
@@ -38,11 +39,10 @@ enum Actions {
 @property (retain) Event* event;
 @property (retain) EventDetailsHeaderCell* headerCell;
 @property (retain) ActionsView* headerActions;
+@property (retain) UIFont* reallySmallFont;
 @property (retain) UIFont* smallFont;
 @property (retain) UIFont* mediumFont;
 @property (retain) UIFont* largeFont;
-@property (copy) NSString* signedUpString;
-@property (copy) NSString* signUpString;
 
 - (void) didConfirmRegistration;
 - (void) didCancelRegistration;

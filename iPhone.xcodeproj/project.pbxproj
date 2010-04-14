@@ -65,7 +65,6 @@
 		94AE8B590F859F8C006AD78D /* UpcomingIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AE8B560F859F8C006AD78D /* UpcomingIcon.png */; };
 		94AE8B5A0F859F8C006AD78D /* SettingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AE8B570F859F8C006AD78D /* SettingsIcon.png */; };
 		94AE8B5B0F859F8C006AD78D /* MyEventsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94AE8B580F859F8C006AD78D /* MyEventsIcon.png */; };
-		94BACFA60F5BBD5C00FDACED /* AttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BACFA50F5BBD5C00FDACED /* AttributeCell.m */; };
 		94BACFB60F5BBFF700FDACED /* ColorCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BACFB50F5BBFF700FDACED /* ColorCache.m */; };
 		94BE51350FBA50D500AD1858 /* InterestAreaFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BE51330FBA50D500AD1858 /* InterestAreaFilterController.m */; };
 		94BE51360FBA50D500AD1858 /* InterestAreaFilterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94BE51340FBA50D500AD1858 /* InterestAreaFilterController.xib */; };
@@ -189,8 +188,6 @@
 		94AE8B560F859F8C006AD78D /* UpcomingIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpcomingIcon.png; sourceTree = "<group>"; };
 		94AE8B570F859F8C006AD78D /* SettingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsIcon.png; sourceTree = "<group>"; };
 		94AE8B580F859F8C006AD78D /* MyEventsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MyEventsIcon.png; sourceTree = "<group>"; };
-		94BACFA40F5BBD5C00FDACED /* AttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeCell.h; sourceTree = "<group>"; };
-		94BACFA50F5BBD5C00FDACED /* AttributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeCell.m; sourceTree = "<group>"; };
 		94BACFB40F5BBFF700FDACED /* ColorCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCache.h; sourceTree = "<group>"; };
 		94BACFB50F5BBFF700FDACED /* ColorCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCache.m; sourceTree = "<group>"; };
 		94BE51320FBA50D500AD1858 /* InterestAreaFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestAreaFilterController.h; sourceTree = "<group>"; };
@@ -389,8 +386,6 @@
 				94C3AE860F91455000153859 /* MemoryTabViewController.h */,
 				94BACFB40F5BBFF700FDACED /* ColorCache.h */,
 				94BACFB50F5BBFF700FDACED /* ColorCache.m */,
-				94BACFA40F5BBD5C00FDACED /* AttributeCell.h */,
-				94BACFA50F5BBD5C00FDACED /* AttributeCell.m */,
 				94DFFFA60F5A0ABF005D62B9 /* ActionsView.m */,
 				94DFFFA50F5A0AB6005D62B9 /* ActionsView.h */,
 				9455CA040F537DA600296B87 /* EventTableCell.h */,
@@ -661,7 +656,6 @@
 				94DFFFA70F5A0ABF005D62B9 /* ActionsView.m in Sources */,
 				9483D93D0F5A184B00406DB3 /* EventDetailsHeaderCell.m in Sources */,
 				94ED9C2A0F5BAFC600F2697F /* EventDetailsTableViewController.m in Sources */,
-				94BACFA60F5BBD5C00FDACED /* AttributeCell.m in Sources */,
 				94BACFB60F5BBFF700FDACED /* ColorCache.m in Sources */,
 				942E23BD0F5E107000C87AC1 /* MapViewController.m in Sources */,
 				943BD0AA0F76EB5000363DF2 /* CDataScanner.m in Sources */,

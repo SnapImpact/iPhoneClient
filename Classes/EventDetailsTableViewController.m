@@ -7,7 +7,6 @@
 //
 
 #import "EventDetailsTableViewController.h"
-#import "AttributeCell.h"
 #import "iVolunteerData.h"
 #import "StringUtilities.h"
 #import "iPhoneAppDelegate.h"
@@ -22,6 +21,7 @@
 @synthesize mediumFont;
 @synthesize largeFont;
 @synthesize busyIndicatorDelegate;
+@synthesize reallySmallFont;
 
 #pragma mark Constants
 #define kSectionsCount 4
@@ -43,6 +43,13 @@
 
 #define kSectionInterestAreas 3
 #define kSectionInterestAreasRowCount #error not supported
+
+#define SetOrigin(view,x,y) view.frame = CGRectMake(x, y, view.frame.size.width, view.frame.size.height)
+#define SetSize(view,width,height) view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, width, height)
+#define SetFrame(view,x,y,width,height) view.frame = CGRectMake(x, y, width, height)
+#define GetSize(label) [label.text sizeWithFont:label.font constrainedToSize:CGSizeMake(label.frame.size.width, label.frame.size.height) lineBreakMode:UILineBreakModeWordWrap]
+#define RePackLabel(label) SetFrame(label, label.frame.origin.x, label.frame.origin.y, label.frame.size.width,GetSize(label).height)
+
 
 #pragma mark Allocator
 
@@ -84,7 +91,7 @@
 		[registerButton release];
 		
     }
-	
+	self.reallySmallFont = [UIFont systemFontOfSize: 10 ];
 	self.smallFont = [UIFont systemFontOfSize: 14 ];
 	self.mediumFont = [UIFont systemFontOfSize: 16 ];
 	self.largeFont = [UIFont systemFontOfSize: 18 ];
@@ -166,31 +173,26 @@
     return self.headerCell;
 }
 
+
+
 - (UITableViewCell*) cellForDescription: (NSUInteger) row 
 {
-	int operatingWidth = [[UIScreen mainScreen] bounds].size.width - (self.tableView.sectionHeaderHeight * 4);
 	UITableViewCell *descriptionCell_ = [[[UITableViewCell alloc] initWithFrame: CGRectZero reuseIdentifier: @"Description" ] autorelease];
+	descriptionCell_.textLabel.text = self.event.details;
 	descriptionCell_.textLabel.font = self.smallFont;
-	descriptionCell_.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
-	[descriptionCell_ setSelectionStyle: UITableViewCellSelectionStyleNone ];
-	
-	CGSize size = [self.event.details sizeWithFont: self.smallFont 
-				   constrainedToSize: CGSizeMake(operatingWidth - 20, 1000 ) 
-				   lineBreakMode: UILineBreakModeWordWrap ];
-	UILabel *text = [[[UILabel alloc] init] autorelease];
-	text.font = self.smallFont;
-	text.text = self.event.details;
-	text.frame = CGRectMake(20, 10, operatingWidth, size.height);
-	text.numberOfLines = 0;
-	[descriptionCell_ addSubview:text];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:kSectionDescription];
+	CGFloat height = [self tableView:self.tableView heightForRowAtIndexPath:indexPath];
+	SetSize(descriptionCell_.textLabel, descriptionCell_.textLabel.frame.size.width, height);
+	descriptionCell_.textLabel.numberOfLines = 0;
 	
     return descriptionCell_;
 }
 
 - (UITableViewCell*) cellForContactInfoRow:(NSInteger) row 
 {
-    AttributeCell* cell = [[[AttributeCell alloc] initWithFrame:[UIScreen mainScreen].applicationFrame
-                                                reuseIdentifier:nil] autorelease];
+	UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil] autorelease];
+	cell.detailTextLabel.font = self.smallFont;
+	cell.textLabel.font = self.smallFont;
     
     //NSString* mapString = NSLocalizedString(@"Map", nil);
     NSString* callString = NSLocalizedString(@"Call", nil);
@@ -207,55 +209,46 @@
     }
     
     NSString* notAvailableString = @"Not Available";
-    
-    CGSize size1 = [callString sizeWithFont:[AttributeCell keyFont]];
-    CGSize size2 = [mailString sizeWithFont:[AttributeCell keyFont]];
-    CGSize size3 = [contactString sizeWithFont:[AttributeCell keyFont]];
-    CGSize size4 = [sourceString sizeWithFont:[AttributeCell keyFont]];
-    CGSize size5 = [interestAreaString sizeWithFont:[AttributeCell keyFont]];
-    CGSize size6 = [notAvailableString sizeWithFont: [AttributeCell keyFont]];
-    
-    NSInteger width = MAX(size1.width, size2.width);
-    width = MAX(width, size3.width);
-    width = MAX(width, size4.width);
-    width = MAX(width, size5.width);
-    width = MAX(width, size6.width);
-    width += 10;
+
     
     switch(row) {
         case kSectionContactInfoRowName:
+			cell.textLabel.text = contactString;
             if([self.event.contact.name length]) {
-                [cell setKey: contactString value: self.event.contact.name keyWidth:width];
+				cell.detailTextLabel.text = self.event.contact.name;
             }
             else {
-                [cell setKey: contactString value: notAvailableString keyWidth: width];
+				cell.detailTextLabel.text = notAvailableString;
             }
             break;
         case kSectionContactInfoRowPhone:
+			cell.textLabel.text = callString;
             if([self.event.contact.phone length]) {
-                [cell setKey: callString value: self.event.contact.phone keyWidth: width ];
+				cell.detailTextLabel.text = self.event.contact.phone;
             }
             else {
-                [cell setKey: callString value: notAvailableString keyWidth: width ];
+				cell.detailTextLabel.text = notAvailableString;
             }
             break;
         case kSectionContactInfoRowEmail:
+			cell.textLabel.text = mailString;
             if([self.event.contact.email length]) {
-                [cell setKey: mailString value: self.event.contact.email keyWidth: width ];
+				cell.detailTextLabel.text = self.event.contact.email;
             }
             else {
-                [cell setKey: mailString value: notAvailableString keyWidth: width ];
+				cell.detailTextLabel.text = notAvailableString;
             }
             break;
         case kSectionContactInfoRowSource:
+			cell.textLabel.text = sourceString;
             if(self.event.url) {
-                [cell setKey: sourceString value: [self.event.url absoluteString] keyWidth: width ];
+				cell.detailTextLabel.text = [self.event.url absoluteString];
             }
             else if([self.event.source.name length]) {
-                [cell setKey: sourceString value: self.event.source.name keyWidth: width ];
+				cell.detailTextLabel.text = self.event.source.name;
             }
             else {
-                [cell setKey: sourceString value: notAvailableString keyWidth: width ];
+				cell.detailTextLabel.text = notAvailableString;
             }
             break;
     }
@@ -267,25 +260,25 @@
 {
     NSString* interestAreaString;
     if( [self.event.interestAreas count] > 1 ) {
-        interestAreaString = NSLocalizedString( @"Interest Areas", @"plural of Interest Area" );
+        interestAreaString = NSLocalizedString( @"Areas", @"plural of Interest Area" );
     }
     else {
-        interestAreaString = NSLocalizedString( @"Interest Area", nil );
+        interestAreaString = NSLocalizedString( @"Area", nil );
     }
-    
-    AttributeCell* cell = [[[AttributeCell alloc] initWithFrame:[UIScreen mainScreen].applicationFrame
-                                                reuseIdentifier: nil ] autorelease];
-    
-    CGSize size = [interestAreaString sizeWithFont:[AttributeCell keyFont]];
-    size.width += 10;
+	UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil] autorelease];
+	cell.detailTextLabel.font = self.smallFont;
+	cell.textLabel.font = self.smallFont;
     
     NSString* value = [[self.event.interestAreas objectAtIndex: row] name];
     
     if( row == 0 ) {
-        [cell setKey: interestAreaString value: value keyWidth: size.width ];
+		cell.textLabel.text = interestAreaString;
+		cell.detailTextLabel.text = value;
+
     }
     else {
-        [cell setKey: @"" value: value keyWidth: size.width ];
+		cell.textLabel.text = @" ";
+		cell.detailTextLabel.text = value;
     }
     
     return cell;
@@ -329,34 +322,16 @@
         CGSize size = [self.event.details sizeWithFont: self.smallFont 
                        constrainedToSize: CGSizeMake(operatingWidth - 20, 1000 ) 
                        lineBreakMode: UILineBreakModeWordWrap ];
-        return size.height + 20;
+		BOOL deviceIsPad = (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone);
+		if (deviceIsPad)
+		{
+			 return size.height + 40;
+		}
+		else 
+		{
+			 return size.height + 20;
+		}
     }
-    /*
-    else if (section == kSectionContactInfo) {
-        switch(row) {
-            case kSectionContactInfoRowName:
-                if(![self.event.contact.name length]) {
-                    return 0;
-                }
-                break;
-            case kSectionContactInfoRowPhone:
-                if(![self.event.contact.phone length]) {
-                    return 0;
-                }
-                break;
-            case kSectionContactInfoRowEmail:
-                if(![self.event.contact.email length]) {
-                    return 0;
-                }
-                break;
-            case kSectionContactInfoRowSource:
-                if(![self.event.source.name length]) {
-                    return 0;
-                }
-                break;
-        }
-    }
-    */
     
     return self.tableView.rowHeight; 
 }
@@ -626,6 +601,7 @@
 	[smallFont release];
 	[mediumFont release];
 	[largeFont release];
+	[reallySmallFont release];
     self.floatingView = nil;
     [super dealloc];
 }
@@ -639,7 +615,7 @@
 }
 
 - (void) didConfirmRegistration {
-    [self.headerActions setTitle:  self.signedUpString forButtonAtIndex: 0 selected: YES animate: YES ];
+   
     self.event.signedUp = [NSNumber numberWithBool: YES];
     [[iVolunteerData sharedVolunteerData] updateMyEventsDataSource: self.event];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Registered" 
