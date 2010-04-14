@@ -20,6 +20,7 @@
 		9011EA4F1106BD1600513269 /* DonateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9011EA4E1106BD1600513269 /* DonateViewController.m */; };
 		9011EA511106BD2500513269 /* gift.png in Resources */ = {isa = PBXBuildFile; fileRef = 9011EA501106BD2500513269 /* gift.png */; };
 		9011EA6D1106BD8C00513269 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9011EA6C1106BD8C00513269 /* StoreKit.framework */; };
+		907E2AB011755218003E0BAD /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907E2AAF11755218003E0BAD /* MainWindow-iPad.xib */; };
 		940875410F5C965C0037C286 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940875400F5C965C0037C286 /* Entitlements.plist */; };
 		941853530FE0966700313AFC /* Entitlements-Development.plist in Resources */ = {isa = PBXBuildFile; fileRef = 941853520FE0966700313AFC /* Entitlements-Development.plist */; };
 		941A744B10323FC40049DD9F /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 941A744A10323FC40049DD9F /* StringUtilities.m */; };
@@ -114,6 +115,7 @@
 		9011EA4E1106BD1600513269 /* DonateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonateViewController.m; sourceTree = "<group>"; };
 		9011EA501106BD2500513269 /* gift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gift.png; sourceTree = "<group>"; };
 		9011EA6C1106BD8C00513269 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		907E2AAF11755218003E0BAD /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		940875400F5C965C0037C286 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		941853520FE0966700313AFC /* Entitlements-Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Entitlements-Development.plist"; sourceTree = "<group>"; };
 		941A744910323FC40049DD9F /* StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtilities.h; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				907E2AAC11755216003E0BAD /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				940875400F5C965C0037C286 /* Entitlements.plist */,
@@ -365,6 +368,14 @@
 				94C3AE820F91452D00153859 /* MapView.h */,
 			);
 			name = MapView;
+			sourceTree = "<group>";
+		};
+		907E2AAC11755216003E0BAD /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				907E2AAF11755218003E0BAD /* MainWindow-iPad.xib */,
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		94163E19104B30000040CFF9 /* UI Classes */ = {
@@ -617,6 +628,7 @@
 				94BE51360FBA50D500AD1858 /* InterestAreaFilterController.xib in Resources */,
 				941853530FE0966700313AFC /* Entitlements-Development.plist in Resources */,
 				9011EA511106BD2500513269 /* gift.png in Resources */,
+				907E2AB011755218003E0BAD /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +698,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = "Entitlements-Development.plist";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Hassan Abdel-Rahman (3GSPKUWY68)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hassan Abdel-Rahman (3GSPKUWY68)";
@@ -705,7 +718,8 @@
 				PRODUCT_NAME = SnapImpact;
 				PROVISIONING_PROFILE = "9ACD0C48-38CA-4143-8E23-CC88E8B094E9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9ACD0C48-38CA-4143-8E23-CC88E8B094E9";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Development;
 		};
@@ -714,6 +728,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: The Community Foundation - i Volunteer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: The Community Foundation - i Volunteer";
@@ -732,7 +747,8 @@
 				PRODUCT_NAME = SnapImpact;
 				PROVISIONING_PROFILE = "8272BC0A-55A4-409B-A6C8-DE93F32FF5D3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8272BC0A-55A4-409B-A6C8-DE93F32FF5D3";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Adhoc;
 		};
@@ -759,6 +775,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: The Community Foundation - i Volunteer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: The Community Foundation - i Volunteer";
@@ -775,7 +792,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 2.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = SnapImpact;
-				SDKROOT = iphoneos2.2.1;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = iTunes;
 		};

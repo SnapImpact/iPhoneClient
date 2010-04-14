@@ -27,8 +27,6 @@ enum Actions {
    UIFont* smallFont;
    UIFont* mediumFont;
    UIFont* largeFont;
-   NSString* signUpString;
-   NSString* signedUpString;
    IBOutlet UIView* floatingView;
    int descriptionHeight;
    enum Actions action;

@@ -21,8 +21,6 @@
 @synthesize smallFont;
 @synthesize mediumFont;
 @synthesize largeFont;
-@synthesize signedUpString;
-@synthesize signUpString;
 @synthesize busyIndicatorDelegate;
 
 #pragma mark Constants
@@ -66,12 +64,7 @@
     self.headerCell.event = event;
     self.navigationItem.title = event.name;
     
-    if([event.signedUp boolValue]) {
-        [ self.headerActions setTitle: signedUpString forButtonAtIndex: 0 selected: YES animate: NO ];
-    }
-    else {
-        [ self.headerActions setTitle: signUpString forButtonAtIndex:0 selected:NO animate:NO ];
-    }
+    
     [self.tableView reloadData];
 }
 
@@ -79,38 +72,17 @@
 
 - (void)viewDidLoad {
     
-	self.signedUpString = NSLocalizedString( @"Registered!", @"Should be positive, yay you signed up!" );
-	self.signUpString = NSLocalizedString( @"Register", @"Indicates clicking this button will sign you up" );
-    
-	NSArray* selectors = [NSArray arrayWithObjects:
-						  [NSValue valueWithPointer: @selector(signUp)],
-						  nil
-						  ];
-	
-	NSArray* titles = [NSArray arrayWithObjects: 
-                       self.signUpString,
-					   nil
-					   ];
-	
-	NSArray* arguments = [NSArray arrayWithObjects: [NSNull null], nil ];
-	UIImage* buttonImage = [[UIImage imageNamed:@"whiteButton.png"] stretchableImageWithLeftCapWidth: 12.0 topCapHeight: 0 ];
-	UIImage* buttonImagePressed = [[UIImage imageNamed:@"blueButton.png"] stretchableImageWithLeftCapWidth: 12.0 topCapHeight: 0 ];
-	UIImage* buttonImageSelected = [[UIImage imageNamed:@"greenButton.png"] stretchableImageWithLeftCapWidth: 12.0 topCapHeight: 0 ];
-	self.headerActions = [ActionsView viewWithTarget: self 
-										   selectors: selectors 
-											  titles: titles 
-										   arguments: arguments 
-											   image: buttonImage
-										imagePressed: buttonImagePressed
-									   imageSelected: buttonImageSelected
-										   textColor: [UIColor darkTextColor]
-								   textColorSelected: [UIColor whiteColor]];
-    
     if([event.signedUp boolValue]) {
-        [ self.headerActions setTitle: signedUpString forButtonAtIndex: 0 selected: YES animate: NO ];
+        // do something something to show your signed up
     }
     else {
-        [ self.headerActions setTitle: signUpString forButtonAtIndex:0 selected:NO animate:NO ];
+        UIBarButtonItem *registerButton = [[UIBarButtonItem alloc] initWithTitle:@"Register"
+																		   style:UIBarButtonItemStyleDone 
+																		  target:self 
+																		  action:@selector(signUp)];
+		self.navigationItem.rightBarButtonItem = registerButton;
+		[registerButton release];
+		
     }
 	
 	self.smallFont = [UIFont systemFontOfSize: 14 ];
@@ -654,8 +626,6 @@
 	[smallFont release];
 	[mediumFont release];
 	[largeFont release];
-	[signUpString release];
-	[signedUpString release];
     self.floatingView = nil;
     [super dealloc];
 }
